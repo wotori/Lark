@@ -1,10 +1,18 @@
+import { LarkHead } from "./components/header";
+import { TextBox } from "./components/textbox";
+
 export function App() {
   return (
     <>
-      <h1 class="text-3xl font-bold underline">Hello world!</h1>
-      <button className="p-2 rounded bg-blue-500 hover:bg-blue-600 transition">
-        ok
-      </button>
+      <LarkHead />
+      <div class="p5">
+        <div class="flex flex-row flex-wrap justify-between">
+          {[1, 2, 3, 4, 5, 6, 7].map((i) => {
+            console.log(i);
+            return <TextBox />;
+          })}
+        </div>
+      </div>
     </>
   );
 }
