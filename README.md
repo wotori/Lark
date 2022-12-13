@@ -1,4 +1,5 @@
 # Lark
+Lark is the microblogging platform powered by mina blockchain.
 ### [meaning](https://www.urbandictionary.com/define.php?term=Lark)
  #1
 ```
