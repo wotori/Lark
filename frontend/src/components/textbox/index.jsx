@@ -6,7 +6,7 @@ export function LarkBox(props) {
       <div className="flex flex-row items-center mt-5 mb-3">
         <img className="h-7 w-7 mx-3" src="svg/user.svg"></img>
         <p className="text-sm">
-          {userName ? userName : "User Name / Mina wallet address"}
+          {userName ? userName : "Mina wallet address"}
         </p>
       </div>
       {/* Content */}
@@ -16,11 +16,11 @@ export function LarkBox(props) {
       >
         <p>
           lark#{text} - Your brain has to be fried in a very specific way to
-          understand this tweet, but I love it.
+          understand this lark, but I love it.
         </p>
       </div>
       {/* Date */}
-      <p className="m-1 text-sm">{date ? date : "27.11.2022 (not specified)"}</p>
+      <p className="m-1 text-sm">{date ? date : "27.11.2022"}</p>
     </div>
   );
 }

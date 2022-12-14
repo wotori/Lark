@@ -9,7 +9,7 @@
   "private": false,
   "scripts": {
     "dev": "mkdir dist && cp -r ./public/* ./dist/ && yarn parcel src/index.html",
-    "build": "yarn parcel build ./src/index.html --dist-dir build --no-source-maps && cp -r ./public/* ./build/",
+    "build": "yarn parcel build ./src/index.html --dist-dir build --no-source-maps --public-url /lark && cp -r ./public/* ./build/",
     "predeploy": "yarn build",
     "deploy": "gh-pages -d build"
   },
