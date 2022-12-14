@@ -2,13 +2,13 @@
   "name": "Lark-UI",
   "version": "1.0.0",
   "description": "Lark is the microblogging platform powered by mina blockchain",
-  "repository": "https://github.com/wotori/Lark",
-  "homepage": "https://wotori.github.io/Lark/",
+  "repository": "https://github.com/wotori/lark",
+  "homepage": "https://wotori.github.io/lark/",
   "author": "Wotori Movako",
   "license": "MIT",
   "private": false,
   "scripts": {
-    "dev": "mkdir dist && cp -r ./public/* ./dist/ && yarn parcel src/index.html",
+    "dev": "mkdir -p dist && cp -r ./public/* ./dist/ && yarn parcel src/index.html",
     "build": "yarn parcel build ./src/index.html --dist-dir build --no-source-maps --public-url /lark && cp -r ./public/* ./build/",
     "predeploy": "yarn build",
     "deploy": "gh-pages -d build"
