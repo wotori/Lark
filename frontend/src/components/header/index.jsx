@@ -7,6 +7,7 @@ export function LarkHead() {
           <p class="p-3 text-white">LARK</p>
         </div>
         <div class="flex flex-row items-center">
+          <img class="object-scale-donw h-10 m-3" src="svg/magnifying_glass.svg" />
           <input type="text"></input>
         </div>
         <p class="text-white">about</p>

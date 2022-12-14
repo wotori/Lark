@@ -7,7 +7,7 @@ export function App() {
       <LarkHead />
       <div class="p5">
         <div class="flex flex-row flex-wrap justify-around">
-          {[1, 2, 3, 4, 5, 6, 7].map((i) => {
+          {Array.from(Array(33).keys()).map((i) => {
             console.log(i);
             return <LarkBox text={i} />;
           })}
