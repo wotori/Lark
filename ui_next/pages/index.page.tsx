@@ -15,7 +15,7 @@ export default function Home() {
   useEffect(() => {
     (async () => {
       await isReady;
-      const { Add } = await import('../../contracts/build/src/Add');
+      const { Add } = await import('../../contracts/');
 
       // Update this to use the address (public key) for your zkApp account
       // To try it out, you can try this address for an example "Add" smart contract that we've deployed to 

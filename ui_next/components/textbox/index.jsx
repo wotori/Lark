@@ -1,5 +1,5 @@
 export function LarkBox(props) {
-  let { text, userName, date, hashtags } = props;
+  let { text, id, date, author } = props;
   return (
     <div className="bg-sky-50 m-3 rounded-xl">
       {/* Author */}
@@ -7,7 +7,7 @@ export function LarkBox(props) {
         <div className="flex flex-row items-center mt-5 mb-3 self-center">
           <img className="h-7 w-7 mx-3" src="svg/user.svg"></img>
           <p className="text-sm">
-            {userName ? userName : "Mina wallet address"}
+            {author ? author : "Mina wallet address"}
           </p>
         </div>
       </div>
@@ -17,8 +17,7 @@ export function LarkBox(props) {
         outline outline-offset-2 outline-blue-500"
       >
         <p>
-          lark#{text} - Your brain has to be fried in a very specific way to
-          understand this lark, but I love it.
+          {text}
         </p>
       </div>
       {/* Date & hashtags */}

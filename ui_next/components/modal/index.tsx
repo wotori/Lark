@@ -145,13 +145,35 @@ export function Modal(props: any) {
       'See transaction at https://berkeley.minaexplorer.com/transaction/' + hash
     );
     saveDataToDB()
-    setAppStateShow(false)
     reset()
     setState({ ...state, creatingTransaction: false });
   }
 
   function saveDataToDB() {
-    console.log("store to db", userAccount, text)
+    setAppStatus("Publishing")
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    var d = new Date();
+    var n = d.toLocaleDateString();
+    var raw = JSON.stringify({
+      "author": userAccount,
+      "text": text,
+      "date": n
+    });
+    console.log("store to db", raw)
+
+    let requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
+
+    fetch("http://84.201.163.14:8000/larks", requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
+    setAppStateShow(false)
   }
 
   return (
@@ -213,12 +235,12 @@ export function Modal(props: any) {
                   <button
                     className={`text-white font-bold uppercase 
                     text-sm px-6 py-3 rounded shadow 
-                    ${text ? "bg-blue" : "bg-gray-300 cursor-not-allowed"} 
+                    ${text && !appStateShow ? "bg-blue" : text && appStateShow ? "bg-gray-300 cursor-wait" : !text && "bg-gray-300 cursor-not-allowed" } 
                     hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150`}
                     type="button"
                     onClick={() => {
                       console.log("minting", text)
-                      if (text) onSendTransaction()
+                      if (text && !appStateShow) onSendTransaction()
                       // reset()
                     }}
                   >
