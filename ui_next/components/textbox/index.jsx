@@ -24,9 +24,9 @@ export function LarkBox(props) {
       {/* Date & hashtags */}
       <div className="pt-3">
         <p className="m-1 text-sm text-center">{date ? date : "undefined"}</p>
-        <p className="m-1 text-sm text-center">
+        {/* <p className="m-1 text-sm text-center">
           {hashtags ? hashtags : "#undefined"}
-        </p>
+        </p> */}
       </div>
     </div>
   );

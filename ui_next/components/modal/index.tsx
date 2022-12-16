@@ -8,7 +8,7 @@ import {
   PrivateKey,
   Field,
 } from 'snarkyjs'
-import { JAppStatus, JStatusShow } from "../jotai";
+import { JAppReady, JAppStatus, JStatusShow } from "../jotai";
 let transactionFee = 0.1;
 
 export function Modal(props: any) {
@@ -26,7 +26,11 @@ export function Modal(props: any) {
   });
   const [appStatus, setAppStatus] = useAtom(JAppStatus)
   const [appStateShow, setAppStateShow] = useAtom(JStatusShow)
+  const [appReady, setAppReady] = useAtom(JAppReady)
+  const [text, setText] = useState("")
+  const [userAccount, setUserAccount] = useState("")
   let limit = 100;
+
   function reset() {
     setCount(0);
     setShow(false);
@@ -58,6 +62,8 @@ export function Modal(props: any) {
 
         const publicKeyBase58: string = (await mina.requestAccounts())[0];
         const publicKey = PublicKey.fromBase58(publicKeyBase58);
+        console.log("got accounts:", publicKeyBase58, publicKey)
+        setUserAccount(publicKeyBase58)
 
         msg = 'using key'
         setAppStatus(msg)
@@ -86,6 +92,7 @@ export function Modal(props: any) {
         const currentNum = await zkappWorkerClient.getNum();
         console.log('current state:', currentNum.toString());
         setAppStateShow(false)
+        setAppReady(true)
 
 
         setState({
@@ -137,9 +144,14 @@ export function Modal(props: any) {
     console.log(
       'See transaction at https://berkeley.minaexplorer.com/transaction/' + hash
     );
-
+    saveDataToDB()
     setAppStateShow(false)
+    reset()
     setState({ ...state, creatingTransaction: false });
+  }
+
+  function saveDataToDB() {
+    console.log("store to db", userAccount, text)
   }
 
   return (
@@ -181,6 +193,7 @@ export function Modal(props: any) {
                     className="focus:outline-none"
                     placeholder="Write your lark blog message"
                     onChange={(e) => {
+                      setText(e.target.value);
                       setCount(e.target.value.length);
                     }}
                   ></textarea>
@@ -198,11 +211,14 @@ export function Modal(props: any) {
                     Close
                   </button>
                   <button
-                    className="bg-blue text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    className={`text-white font-bold uppercase 
+                    text-sm px-6 py-3 rounded shadow 
+                    ${text ? "bg-blue" : "bg-gray-300 cursor-not-allowed"} 
+                    hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150`}
                     type="button"
                     onClick={() => {
-                      console.log("minting")
-                      onSendTransaction()
+                      console.log("minting", text)
+                      if (text) onSendTransaction()
                       // reset()
                     }}
                   >

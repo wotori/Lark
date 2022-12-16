@@ -1,8 +1,13 @@
 import { useState } from "react";
+import { JAppReady } from "../jotai";
 import { Modal } from "../modal";
+import { useAtom } from "jotai"
 
 export default function LarkHead() {
   const [showModal, setShowModal] = useState();
+  const [appReady, setAppReady] = useAtom(JAppReady)
+  console.log("app ready:", appReady)
+
   return (
     <>
       <Modal show={showModal} setShow={setShowModal} />
@@ -12,13 +17,15 @@ export default function LarkHead() {
           <p className="p-3 text-white cursor-default select-none">LARK</p>
         </div>
         <p
-          className="p-3 text-white cursor-pointer select-none"
+          className={`p-3 text-white 
+          ${appReady ? "cursor-pointer" : "cursor-wait"} 
+          select-none`}
           data-modal-toggle="defaultModal"
-          onClick={() => setShowModal(true)}
+          onClick={() => setShowModal(appReady && true)}
         >
           create
         </p>
-        <div className="flex flex-row items-center">
+        <div className="flex flex-row items-center hidden">
           <img
             className="object-scale-donw h-10 m-3"
             src="svg/magnifying_glass.svg"

@@ -12,6 +12,7 @@ Lark is the microblogging platform powered by mina blockchain.
 - backend api for storing the data
 ### to do
 - store data on mina chain
+- mint lark blogpost with hashtags
 - query larks by hashtags
 - filter by hashtags
 - add "like button" feature
