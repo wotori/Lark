@@ -10,12 +10,12 @@ Lark is the microblogging platform powered by mina blockchain.
 - inteface for creating larks
 - mina smart contract for user validation
 - backend api for storing the data
-### to be done
+### to do
 - store data on mina chain
 - query larks by hashtags
 - filter by hashtags
+- add "like button" feature
 # Description of the contents
-
 
 ## contracts
 consist mina contracts
@@ -27,4 +27,4 @@ Uncaught (in promise) DOMException: Failed to execute 'postMessage' on 'Worker':
 ```
 
 ## ui_next
-UI based on next js. It's currently in production version of dApp
+UI based on next js. Currently in production version of dApp. Basic logic with workers and transaction taken from official [mina 4th tutorial](https://docs.minaprotocol.com/zkapps/tutorials/zkapp-ui-with-react).
