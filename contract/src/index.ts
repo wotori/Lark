@@ -1,3 +1,3 @@
-import { Contract } from './Contract.js';
+import { Add } from './Add.js';
 
-export { Contract };
+export { Add };
