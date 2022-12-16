@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import '../../pages/reactCOIServiceWorker';
-
+import { useAtom } from "jotai"
 import ZkappWorkerClient from '../../pages/zkappWorkerClient';
 
 import {
@@ -8,6 +8,7 @@ import {
   PrivateKey,
   Field,
 } from 'snarkyjs'
+import { JAppStatus, JStatusShow } from "../jotai";
 let transactionFee = 0.1;
 
 export function Modal(props: any) {
@@ -23,6 +24,8 @@ export function Modal(props: any) {
     zkappPublicKey: null as null | PublicKey,
     creatingTransaction: false,
   });
+  const [appStatus, setAppStatus] = useAtom(JAppStatus)
+  const [appStateShow, setAppStateShow] = useAtom(JStatusShow)
   let limit = 100;
   function reset() {
     setCount(0);
@@ -32,11 +35,17 @@ export function Modal(props: any) {
   useEffect(() => {
     (async () => {
       if (!state.hasBeenSetup) {
+        setAppStateShow(true)
         const zkappWorkerClient = new ZkappWorkerClient();
 
-        console.log('Loading SnarkyJS...');
+        let msg = 'Loading SnarkyJS'
+        console.log(msg);
+        setAppStatus(msg)
+
         await zkappWorkerClient.loadSnarkyJS();
-        console.log('done');
+        msg = "done"
+        console.log(msg);
+        setAppStatus(msg)
 
         await zkappWorkerClient.setActiveInstanceToBerkeley();
 
@@ -50,26 +59,34 @@ export function Modal(props: any) {
         const publicKeyBase58: string = (await mina.requestAccounts())[0];
         const publicKey = PublicKey.fromBase58(publicKeyBase58);
 
-        console.log('using key', publicKey.toBase58());
+        msg = 'using key'
+        setAppStatus(msg)
+        console.log(msg, publicKey.toBase58());
 
-        console.log('checking if account exists...');
+        msg = 'checking if account exists'
+        setAppStatus(msg)
+        console.log(msg);
         const res = await zkappWorkerClient.fetchAccount({ publicKey: publicKey! });
         const accountExists = res.error == null;
 
         await zkappWorkerClient.loadContract();
 
-        console.log('compiling zkApp');
+        msg = 'compiling zkApp'
+        setAppStatus(msg)
+        console.log(msg);
         await zkappWorkerClient.compileContract();
-        console.log('zkApp compiled');
+        msg = 'zkApp compiled'
+        setAppStatus(msg)
+        console.log(msg);
 
         const zkappPublicKey = PublicKey.fromBase58('B62qp4wFY4QLakJRpFEvEi956ogDN3uT8r2r7MZmBcmDe82QW8BGqmQ');
 
         await zkappWorkerClient.initZkappInstance(zkappPublicKey);
-
-        console.log('getting zkApp state...');
         await zkappWorkerClient.fetchAccount({ publicKey: zkappPublicKey })
         const currentNum = await zkappWorkerClient.getNum();
         console.log('current state:', currentNum.toString());
+        setAppStateShow(false)
+
 
         setState({
           ...state,
@@ -79,7 +96,7 @@ export function Modal(props: any) {
           publicKey,
           zkappPublicKey,
           accountExists,
-          currentNum
+          // currentNum
         });
       }
     })();
@@ -87,19 +104,28 @@ export function Modal(props: any) {
 
   const onSendTransaction = async () => {
     setState({ ...state, creatingTransaction: true });
-    console.log('sending a transaction...');
+    let msg = 'sending a transaction'
+    setAppStatus(msg)
+    setAppStateShow(true)
+    console.log(msg);
 
     await state.zkappWorkerClient!.fetchAccount({ publicKey: state.publicKey! });
 
     await state.zkappWorkerClient!.createUpdateTransaction();
 
-    console.log('creating proof...');
+    msg = 'creating proof'
+    setAppStatus(msg)
+    console.log(msg);
     await state.zkappWorkerClient!.proveUpdateTransaction();
 
-    console.log('getting Transaction JSON...');
+    msg = 'getting Transaction JSON'
+    setAppStatus(msg)
+    console.log(msg);
     const transactionJSON = await state.zkappWorkerClient!.getTransactionJSON()
 
-    console.log('requesting send transaction...');
+    msg = 'requesting send transaction'
+    setAppStatus(msg)
+    console.log(msg);
     const { hash } = await (window as any).mina.sendTransaction({
       transaction: transactionJSON,
       feePayer: {
@@ -112,6 +138,7 @@ export function Modal(props: any) {
       'See transaction at https://berkeley.minaexplorer.com/transaction/' + hash
     );
 
+    setAppStateShow(false)
     setState({ ...state, creatingTransaction: false });
   }
 
@@ -122,7 +149,7 @@ export function Modal(props: any) {
           <div
             className="xyz justify-center items-center 
             flex overflow-x-hidden overflow-y-auto 
-            fixed inset-0 z-50 outline-none focus:outline-none"
+            fixed inset-0 z-10 outline-none focus:outline-none"
             onClick={(e) => {
               let check = e.target.className.slice(0, 3);
               if (check == "xyz") {
@@ -152,7 +179,7 @@ export function Modal(props: any) {
                     rows={5}
                     maxLength={limit}
                     className="focus:outline-none"
-                    placeholder="Write your lark blog message..."
+                    placeholder="Write your lark blog message"
                     onChange={(e) => {
                       setCount(e.target.value.length);
                     }}
@@ -174,7 +201,7 @@ export function Modal(props: any) {
                     className="bg-blue text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                     type="button"
                     onClick={() => {
-                      console.log("minting...")
+                      console.log("minting")
                       onSendTransaction()
                       // reset()
                     }}
@@ -185,7 +212,7 @@ export function Modal(props: any) {
               </div>
             </div>
           </div>
-          <div className="opacity-25 fixed inset-0 z-40 bg-blue"></div>
+          <div className="opacity-25 fixed inset-0 bg-blue"></div>
         </>
       ) : null}
     </>
