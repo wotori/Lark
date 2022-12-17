@@ -22,7 +22,7 @@ export default function LarkGrid() {
       redirect: "follow",
     };
 
-    fetch("http://84.201.163.14:8000/larks", requestOptions)
+    fetch("https://lark.herokuapp.com/larks", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         setLarks(result);

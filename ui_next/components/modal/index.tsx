@@ -165,7 +165,7 @@ export function Modal(props: any) {
     });
     console.log("store to db", raw)
 
-    fetch("http://84.201.163.14:8000/larks", {
+    fetch("https://lark.herokuapp.com/larks", {
       method: 'POST',
       headers: myHeaders,
       body: raw,
@@ -184,7 +184,7 @@ export function Modal(props: any) {
     <>
       {show ? (
         <>
-          <div
+          <div 
             className="xyz justify-center items-center 
             flex overflow-x-hidden overflow-y-auto 
             fixed inset-0 z-10 outline-none focus:outline-none"
