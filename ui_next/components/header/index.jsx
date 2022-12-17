@@ -2,6 +2,7 @@ import { useState } from "react";
 import { JAppReady } from "../jotai";
 import { Modal } from "../modal";
 import { useAtom } from "jotai"
+import Image from 'next/image'
 
 export default function LarkHead() {
   const [showModal, setShowModal] = useState();
@@ -14,7 +15,7 @@ export default function LarkHead() {
       <div className="px-10 bg-blue flex flex-row items-center justify-between">
         <a target="_blank" rel="noopener noreferrer" href="https://github.com/wotori/lark">
           <div className="flex flex-row items-center">
-            <img className="object-scale-down h-10" src="svg/logo.svg"></img>
+            <Image alt="metadata" className="object-scale-down h-10" src="svg/logo.svg" width="50" height="200" />
             <p className="p-3 text-white cursor-default select-none">LARK</p>
           </div>
         </a>
@@ -28,9 +29,10 @@ export default function LarkHead() {
           create
         </p>
         <div className="flex flex-row items-center hidden">
-          <img
+          <Image alt="metadata"
             className="object-scale-donw h-10 m-3"
             src="svg/magnifying_glass.svg"
+            width="200" height="200"
           />
           <input
             type="text"

@@ -165,14 +165,12 @@ export function Modal(props: any) {
     });
     console.log("store to db", raw)
 
-    let requestOptions = {
+    fetch("http://84.201.163.14:8000/larks", {
       method: 'POST',
       headers: myHeaders,
       body: raw,
       redirect: 'follow'
-    };
-
-    fetch("http://84.201.163.14:8000/larks", requestOptions)
+    })
       .then(response => response.text())
       .then(result => {
         console.log(result)
@@ -191,7 +189,9 @@ export function Modal(props: any) {
             flex overflow-x-hidden overflow-y-auto 
             fixed inset-0 z-10 outline-none focus:outline-none"
             onClick={(e) => {
-              let check = e.target.className.slice(0, 3);
+              console.log(typeof(e))
+              let target = e.target as HTMLButtonElement
+              let check = target.className.slice(0, 3);
               if (check == "xyz") {
                 reset();
               }
@@ -215,7 +215,6 @@ export function Modal(props: any) {
                 {/*body*/}
                 <div className="relative p-6 flex-auto">
                   <textarea
-                    type="text"
                     rows={5}
                     maxLength={limit}
                     className="focus:outline-none"

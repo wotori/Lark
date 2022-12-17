@@ -9,7 +9,7 @@
     "lint": "next lint",
     "ts-watch": "tsc --noEmit --incremental --watch",
     "export": "next export",
-    "deploy": "next build && next export && touch out/.nojekyll  && git add -f out && git commit -m \"Deploy gh-pages\" && cd .. && git subtree push --prefix ui/out origin gh-pages"
+    "deploy": "next build && next export && touch out/.nojekyll && git add -f out && git commit -m \"Deploy gh-pages\" && cd .. && git subtree push --prefix ui/out origin gh-pages"
   },
   "dependencies": {
     "@tailwindcss/forms": "^0.5.3",
@@ -20,6 +20,7 @@
     "coi-serviceworker": "^0.1.6",
     "eslint": "8.28.0",
     "eslint-config-next": "13.0.5",
+    "gh-pages": "^4.0.0",
     "jotai": "^1.11.2",
     "next": "13.0.5",
     "react": "18.2.0",

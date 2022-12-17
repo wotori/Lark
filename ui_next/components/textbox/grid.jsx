@@ -36,7 +36,7 @@ export default function LarkGrid() {
       <div className="flex flex-row flex-auto flex-wrap justify-center">
         {/* Array.from(Array(33).keys()) */}
         {larks.slice(0).reverse().map((i) => {
-          return <LarkBox id={i.id} text={i.text} date={i.date} author={i.author} />;
+          return <LarkBox key={i.id} id={i.id} text={i.text} date={i.date} author={i.author} />;
         })}
       </div>
     </div>

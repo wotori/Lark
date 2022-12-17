@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 export function LarkBox(props) {
   let { text, id, date, author } = props;
   return (
@@ -5,7 +7,7 @@ export function LarkBox(props) {
       {/* Author */}
       <div className="flex flex-row justify-around pr-5">
         <div className="flex flex-row items-center mt-5 mb-3 self-center">
-          <img className="h-7 w-7 mx-3" src="svg/user.svg"></img>
+          <Image alt="metadata" className="h-7 w-7 mx-3" width="200" height="200" src="svg/user.svg"></Image>
           <p className="text-sm">
             {author ? author.slice(0, 7) + "..." + author.slice(45, -1) : "Mina wallet address"}
           </p>
