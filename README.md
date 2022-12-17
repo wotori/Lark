@@ -16,10 +16,12 @@ Lark is the microblogging platform powered by mina blockchain.
 - query larks by hashtags
 - filter by hashtags
 - add "like button" feature
+- authors awards (related to "like" feature) 
+- donations
 # Description of the contents
 
 ## contracts
-consist mina contracts
+consist mina default contract Add for tests and education purposes and [nft-zkapp](https://github.com/comdex/nft-zkapp) fork for future use of lark messages creation.
 
 ## ui_react
 First iter UI was made with react but there is an error while running the worker so I switched to next from official mina tutorial.
