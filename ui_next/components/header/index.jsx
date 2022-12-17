@@ -12,12 +12,14 @@ export default function LarkHead() {
     <>
       <Modal show={showModal} setShow={setShowModal} />
       <div className="px-10 bg-blue flex flex-row items-center justify-between">
-        <div className="flex flex-row items-center">
-          <img className="object-scale-down h-10" src="svg/logo.svg"></img>
-          <p className="p-3 text-white cursor-default select-none">LARK</p>
-        </div>
+        <a target="_blank" rel="noopener noreferrer" href="https://github.com/wotori/lark">
+          <div className="flex flex-row items-center">
+            <img className="object-scale-down h-10" src="svg/logo.svg"></img>
+            <p className="p-3 text-white cursor-default select-none">LARK</p>
+          </div>
+        </a>
         <p
-          className={`p-3 text-white 
+          className={`p-3 text-white text-2xl
           ${appReady ? "cursor-pointer" : "cursor-wait"} 
           select-none`}
           data-modal-toggle="defaultModal"
@@ -35,7 +37,7 @@ export default function LarkHead() {
             className="rounded dark:focus:ring-blue-500"
           ></input>
         </div>
-        <p className="text-white cursor-pointer">about</p>
+        {/* <p className="text-white cursor-pointer">about</p> */}
       </div>
     </>
   );

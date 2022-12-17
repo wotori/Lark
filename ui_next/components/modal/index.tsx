@@ -8,7 +8,7 @@ import {
   PrivateKey,
   Field,
 } from 'snarkyjs'
-import { JAppReady, JAppStatus, JStatusShow } from "../jotai";
+import { JAppReady, JAppStatus, JRefresh, JStatusShow } from "../jotai";
 let transactionFee = 0.1;
 
 export function Modal(props: any) {
@@ -29,6 +29,8 @@ export function Modal(props: any) {
   const [appReady, setAppReady] = useAtom(JAppReady)
   const [text, setText] = useState("")
   const [userAccount, setUserAccount] = useState("")
+  const [refresh, setRefresh] = useAtom(JRefresh)
+
   let limit = 100;
 
   function reset() {
@@ -155,10 +157,11 @@ export function Modal(props: any) {
     myHeaders.append("Content-Type", "application/json");
     var d = new Date();
     var n = d.toLocaleDateString();
+    var t = d.toLocaleTimeString();
     var raw = JSON.stringify({
       "author": userAccount,
       "text": text,
-      "date": n
+      "date": n + " " + t
     });
     console.log("store to db", raw)
 
@@ -171,7 +174,10 @@ export function Modal(props: any) {
 
     fetch("http://84.201.163.14:8000/larks", requestOptions)
       .then(response => response.text())
-      .then(result => console.log(result))
+      .then(result => {
+        console.log(result)
+        setRefresh(Math.random())
+      })
       .catch(error => console.log('error', error));
     setAppStateShow(false)
   }
@@ -235,7 +241,7 @@ export function Modal(props: any) {
                   <button
                     className={`text-white font-bold uppercase 
                     text-sm px-6 py-3 rounded shadow 
-                    ${text && !appStateShow ? "bg-blue" : text && appStateShow ? "bg-gray-300 cursor-wait" : !text && "bg-gray-300 cursor-not-allowed" } 
+                    ${text && !appStateShow ? "bg-blue" : text && appStateShow ? "bg-gray-300 cursor-wait" : !text && "bg-gray-300 cursor-not-allowed"} 
                     hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150`}
                     type="button"
                     onClick={() => {

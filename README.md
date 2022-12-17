@@ -2,7 +2,7 @@
 Lark is the microblogging platform powered by mina blockchain.
 
 ## UI
-![ui](ui_react/ui/v2.jpg)
+![ui](ui_react/ui/v3.jpg)
 
 ## Features
 ### currently done

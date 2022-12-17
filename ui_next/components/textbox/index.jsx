@@ -7,7 +7,7 @@ export function LarkBox(props) {
         <div className="flex flex-row items-center mt-5 mb-3 self-center">
           <img className="h-7 w-7 mx-3" src="svg/user.svg"></img>
           <p className="text-sm">
-            {author ? author : "Mina wallet address"}
+            {author ? author.slice(0, 7) + "..." + author.slice(45, -1) : "Mina wallet address"}
           </p>
         </div>
       </div>
