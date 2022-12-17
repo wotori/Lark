@@ -3,7 +3,7 @@ from databases import Database
 from pydantic import BaseModel
 
 metadata = sqlalchemy.MetaData()
-database = Database("postgresql+psycopg2://postgres:docker@127.0.0.1:5432/lark")
+database = Database("postgresql+psycopg2://postgres:Hello@84.201.163.14:5432/lark")
 
 class LarkModel(BaseModel):
     author: str
