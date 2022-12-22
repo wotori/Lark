@@ -9,7 +9,9 @@
     "lint": "next lint",
     "ts-watch": "tsc --noEmit --incremental --watch",
     "export": "next export",
-    "deploy": "next build && next export && touch out/.nojekyll && git add -f out && git commit -m \"Deploy gh-pages\" && cd .. && git subtree push --prefix ui/out origin gh-pages"
+    "deploy": "next build && next export && touch out/.nojekyll && git add -f out && git commit -m \"Deploy gh-pages\" && cd .. && git subtree push --prefix ui_next/out origin gh-pages",
+    "forcepush": "git push origin `git subtree split --prefix out main`:gh-pages --force",
+    "anotherpush": "git subtree push --prefix ui_next/out origin gh-pages"
   },
   "dependencies": {
     "@tailwindcss/forms": "^0.5.3",
