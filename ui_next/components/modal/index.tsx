@@ -87,7 +87,7 @@ export function Modal(props: any) {
         setAppStatus(msg)
         console.log(msg);
 
-        const zkappPublicKey = PublicKey.fromBase58('B62qp4wFY4QLakJRpFEvEi956ogDN3uT8r2r7MZmBcmDe82QW8BGqmQ');
+        const zkappPublicKey = PublicKey.fromBase58('B62qordF2MsP4tYWZojMn5f3FYbESpsKS6pLSqqPRe1U8i5ZaZrBron');
 
         await zkappWorkerClient.initZkappInstance(zkappPublicKey);
         await zkappWorkerClient.fetchAccount({ publicKey: zkappPublicKey })

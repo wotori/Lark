@@ -2,13 +2,13 @@ from logging.config import fileConfig
 
 from alembic import context
 from sqlalchemy import engine_from_config, pool
-
+import os
 from app.database import larks, metadata
-
+DATABASE_URL = os.environ("DATABASE_URL")
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
-DB_URL = "postgresql+psycopg2://postgres:Hello@84.201.163.14:5432/lark"
+DB_URL = DATABASE_URL
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
 fileConfig(config.config_file_name)

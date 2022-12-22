@@ -1,9 +1,12 @@
+import os
+
 import sqlalchemy
 from databases import Database
 from pydantic import BaseModel
 
+DATABASE_URL = os.environ("DATABASE_URL")
 metadata = sqlalchemy.MetaData()
-database = Database("postgresql+psycopg2://postgres:Hello@84.201.163.14:5432/lark")
+database = DATABASE_URL
 
 class LarkModel(BaseModel):
     author: str
