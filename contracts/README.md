@@ -1,4 +1,4 @@
-# Mina zkApp: [Contract](https://berkeley.minaexplorer.com/transaction/CkpYYdcpWmgPi5TMeivQPdVSY68WGVjoa9iyEZq7JhJmv9J6ipsNq)
+# Mina zkApp: [Contract](https://berkeley.minaexplorer.com/transaction/CkpZTCfHJVvTaEF2Y42AxCgFQf7FzqWuSPiHNUfNjnSj6eB2SEDda)
 
 This template uses TypeScript.
 
